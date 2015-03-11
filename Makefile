@@ -1,8 +1,8 @@
-all: libhelpers cat/cat
+all: libhelpers cat
 
 libhelpers:
 	cd lib && make
-cat/cat: 
+cat: 
 	cd cat && make
 	
 
