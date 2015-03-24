@@ -15,21 +15,22 @@ void reverse(char* buf, size_t length) {
 
 int main(int argc, char* argv[]) {
 	char buf[4096];
-    char* error = strerror(errno);
     ssize_t read_cur = 0;
     ssize_t write_cur = 0;
 
 	while(1) {
 	        read_cur = read_until(STDIN_FILENO, buf, sizeof(buf), ' ');
 	        if(read_cur == -1) {
-	            write_(STDERR_FILENO, error, strlen(error) * sizeof(char));
-	            return 1;
+	            return errno;
 	        }
-	        reverse(buf,read_cur);
+	        if (buf[read_cur-1] == ' ') {
+		  		reverse(buf, read_cur-1);
+			}
+			else 
+				reverse(buf,read_cur);
 	        write_cur = write_(STDOUT_FILENO, buf, read_cur);
 	        if(write_cur == -1) {
-	            write_(STDERR_FILENO, error, strlen(error) * sizeof(char));
-	            return 2;
+	           return errno;
 	        }
 	        
 	        
