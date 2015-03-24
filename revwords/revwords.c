@@ -14,12 +14,16 @@ void reverse(char* buf, size_t length) {
 
 
 int main(int argc, char* argv[]) {
-	char buf[4096];
+	int buf_size = 4096;
+	char buf[buf_size];
     ssize_t read_cur = 0;
     ssize_t write_cur = 0;
 
 	while(1) {
-	        read_cur = read_until(STDIN_FILENO, buf, sizeof(buf), ' ');
+	        read_cur = read_until(STDIN_FILENO, buf,buf_size , ' ');
+	        if(read_cur == 0) {
+	            return 0;
+	        }
 	        if(read_cur == -1) {
 	            return errno;
 	        }

@@ -49,38 +49,15 @@ size_t read_until(int fd, void * buf, size_t count, char delimiter){
         if(read_cur == -1) {
             return -1;
         }
-        if(read_cur == 0||read_all==count)
+        if((read_cur == 0)||(read_all==count))
         	return read_all;
 
-        
-        read_all += read_cur;/*
-        buf += read_cur;
-        count -= read_cur;*/
+              
         if((((char*)buf)[0] == delimiter )){
-        	return read_all;
+        	return read_all+1;
         }
-        
-        buf+=read_cur;
+        read_all++;
+        buf++;
     }
 	return 0;
-}
-ssize_t read_until2(int fd, void * buf, size_t count, char delimiter) {
-	ssize_t offset = 0;
-	for(;;) {
-		ssize_t r = read(fd, buf + offset, 1);
-		if(r == -1) {
-			return -1;
-		}
-		if(r == 0) {
-		  return offset;
-		}
-		
-		if(((char*) buf)[offset] == delimiter) {
-			return offset+1;
-		}
-		if(offset == count) {
-			return count;
-		}
-		offset ++;	
-	}
 }
