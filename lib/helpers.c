@@ -51,13 +51,14 @@ size_t read_until(int fd, void * buf, size_t count, char delimiter){
         }
         if((read_cur == 0)||(read_all==count))
         	return read_all;
-
+		
               
-        if((((char*)buf)[0] == delimiter )){
+        if((((char*)buf)[0] == delimiter )||sizeof(buf)==0){
         	return read_all+1;
         }
         read_all++;
         buf++;
+        
     }
 	return 0;
 }

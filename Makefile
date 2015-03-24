@@ -1,8 +1,9 @@
-all: libhelpers cat revwords
-
-libhelpers:
+all:
 	cd lib && make
-cat: 
 	cd cat && make
-revwords: 
 	cd revwords && make
+
+clean:
+	cd lib && make clean
+	cd cat && make clean
+	cd revwords && make clean

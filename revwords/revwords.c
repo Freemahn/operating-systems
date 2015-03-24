@@ -20,8 +20,9 @@ int main(int argc, char* argv[]) {
     ssize_t write_cur = 0;
 
 	while(1) {
-	        read_cur = read_until(STDIN_FILENO, buf,buf_size , ' ');
+	        read_cur = read_until(STDIN_FILENO, buf, buf_size, ' ');
 	        if(read_cur == 0) {
+	        	write_(STDOUT_FILENO, "\n", sizeof("\n"));
 	            return 0;
 	        }
 	        if(read_cur == -1) {
@@ -39,6 +40,6 @@ int main(int argc, char* argv[]) {
 	        
 	        
 	    }
-
+	write_(STDOUT_FILENO, "\n", sizeof("\n"));
 	return 0;
 }
